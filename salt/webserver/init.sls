@@ -53,6 +53,12 @@ webproject_project:
       - virtualenv: {{ pillar['files']['env_dir'] }}
       - service: postgresql
 
+postfix:
+  pkg:
+    - latest
+  service:
+    - running
+
 nginx:
   user:
     - present
