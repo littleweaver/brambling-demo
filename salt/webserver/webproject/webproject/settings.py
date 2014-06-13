@@ -115,3 +115,5 @@ AUTH_USER_MODEL = 'brambling.Person'
 
 STRIPE_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_pk"] }}'
 STRIPE_SECRET_KEY = '{{ pillar["deploy"]["stripe_sk"] }}'
+
+DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
