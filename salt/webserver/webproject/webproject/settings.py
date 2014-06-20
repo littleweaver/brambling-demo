@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'zenaida',
+    'zenaida.contrib.feedback',
     'floppyforms',
     'django_filters',
 )
@@ -50,6 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'zenaida.contrib.feedback.middleware.FeedbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
