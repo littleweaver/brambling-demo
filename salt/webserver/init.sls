@@ -132,3 +132,26 @@ gunicorn_circus_start:
       - file: gunicorn_circus
       - virtualenv: webproject_env
     - onlyif: "[ `circusctl status gunicorn` == 'stopped' ]"
+
+
+collectstatic:
+  cmd.wait:
+    - name: {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py collectstatic --noinput
+    - user: webproject
+    - watch:
+      - file: webproject_project
+      - virtualenv: webproject_env
+    - require:
+      - postgres_database: webproject_db
+      - user: webproject_user
+
+migrate:
+  cmd.wait:
+    - name: {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py migrate --noinput
+    - user: webproject
+    - watch:
+      - file: webproject_project
+      - virtualenv: webproject_env
+    - require:
+      - postgres_database: webproject_db
+      - user: webproject_user
