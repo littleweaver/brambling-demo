@@ -120,6 +120,7 @@ STRIPE_APPLICATION_ID = '{{ pillar["deploy"]["stripe_application_id"] }}'
 STRIPE_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_pk"] }}'
 STRIPE_SECRET_KEY = '{{ pillar["deploy"]["stripe_sk"] }}'
 
+DWOLLA_SANDBOX = {% if pillar["deploy"]["dwolla_sandbox"] %}True{% else %}False{% endif %}
 DWOLLA_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_application_key"] }}'
 DWOLLA_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_application_secret"] }}'
 
