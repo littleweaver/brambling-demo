@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'zenaida.contrib.feedback',
     'floppyforms',
     'django_filters',
+    'daguerre',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,7 +116,11 @@ LOGIN_URL = reverse_lazy('login')
 
 AUTH_USER_MODEL = 'brambling.Person'
 
+STRIPE_APPLICATION_ID = '{{ pillar["deploy"]["stripe_application_id"] }}'
 STRIPE_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_pk"] }}'
 STRIPE_SECRET_KEY = '{{ pillar["deploy"]["stripe_sk"] }}'
+
+DWOLLA_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_application_key"] }}'
+DWOLLA_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_application_secret"] }}'
 
 DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
