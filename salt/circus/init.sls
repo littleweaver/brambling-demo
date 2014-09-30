@@ -1,9 +1,22 @@
+gcc:
+  pkg.installed
+
 g++:
+  pkg.installed
+
+python-pip:
+  pkg.installed
+
+python-dev:
   pkg.installed
 
 pyzmq:
   pip.installed:
     - name: pyzmq==13.1.0
+    - require:
+      - pkg: python-pip
+      - pkg: python-dev
+      - pkg: gcc
 
 circus:
   pip.installed:
