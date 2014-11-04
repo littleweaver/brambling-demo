@@ -139,7 +139,8 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': '{{ pillar["files"]["logs"]["django_file"] }}',
-            'maxBytes': 2048,
+            # Max size: 2MB
+            'maxBytes': 2 * 1024 * 1024,
             'backupCount': 5,
         },
     },
