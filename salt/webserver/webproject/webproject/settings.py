@@ -133,27 +133,22 @@ DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        },
-    },
     'handlers': {
-        'gunicorn_log': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'logging.StreamHandler',
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django.log',
         },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['gunicorn_log'],
-            'level': 'ERROR',
+            'handlers': ['file'],
+            'level': 'DEBUG',
             'propagate': False,
         },
         'django.security': {
-            'handlers': ['gunicorn_log'],
-            'level': 'ERROR',
+            'handlers': ['file'],
+            'level': 'DEBUG',
             'propagate': False,
         },
     },
