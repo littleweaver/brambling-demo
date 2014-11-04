@@ -13,6 +13,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
+ADMINS = (
+    ('Little Weaver', 'hello@littleweaverweb.com'),
+)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -125,3 +129,27 @@ DWOLLA_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_application_key"] }}'
 DWOLLA_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_application_secret"] }}'
 
 DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'gunicorn_log': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'gunicorn_log'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['mail_admins', 'gunicorn_log'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}

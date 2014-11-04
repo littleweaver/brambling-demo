@@ -88,6 +88,7 @@ eventlet:
 
 gunicorn:
   pip.installed:
+    - name: gunicorn==19.1.1
     - bin_env: {{ pillar['files']['env_dir'] }}
     - user: webproject
     - require:
