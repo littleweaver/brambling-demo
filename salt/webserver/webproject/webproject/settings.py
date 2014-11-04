@@ -136,8 +136,10 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/django.log',
+            'class': 'logging.RotatingFileHandler',
+            'filename': '{{ pillar["files"]["logs"]["django_file"] }}',
+            'maxBytes': 2048,
+            'backupCount': 5,
         },
     },
     'loggers': {

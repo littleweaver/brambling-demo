@@ -42,6 +42,13 @@ webproject_env:
       - user: webproject
       - file: webproject_dirs
 
+django_log_dir:
+  file.directory:
+    - name: {{ pillar['files']['logs']['django_dir'] }}
+    - user: webproject
+    - group: webproject
+    - mode: 644
+
 webproject_project:
   file.recurse:
     - user: webproject
@@ -50,6 +57,7 @@ webproject_project:
     - source: salt://webserver/webproject/
     - template: jinja
     - require:
+      - file: django_log_dir
       - virtualenv: {{ pillar['files']['env_dir'] }}
       - service: postgresql
 
@@ -97,7 +105,7 @@ gunicorn:
 
 gunicorn_log:
   file.managed:
-    - name: /var/log/gunicorn.log
+    - name: {{ pillar['files']['logs']['gunicorn'] }}
     - user: webproject
     - group: webproject
     - mode: 644
