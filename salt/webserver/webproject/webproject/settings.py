@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'zenaida',
     'zenaida.contrib.feedback',
+    'zenaida.contrib.hints',
     'floppyforms',
     'django_filters',
     'daguerre',
