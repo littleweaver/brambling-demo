@@ -47,7 +47,7 @@ django_log_dir:
     - name: {{ pillar['files']['logs']['django_dir'] }}
     - user: webproject
     - group: webproject
-    - mode: 644
+    - mode: 755
 
 webproject_project:
   file.recurse:
