@@ -133,6 +133,11 @@ DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
     'handlers': {
         'gunicorn_log': {
             'level': 'ERROR',
@@ -142,12 +147,12 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins', 'gunicorn_log'],
+            'handlers': ['gunicorn_log'],
             'level': 'ERROR',
             'propagate': False,
         },
         'django.security': {
-            'handlers': ['mail_admins', 'gunicorn_log'],
+            'handlers': ['gunicorn_log'],
             'level': 'ERROR',
             'propagate': False,
         },
