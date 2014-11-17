@@ -97,7 +97,7 @@ nginx_app_conf:
 nginx_site_conf:
   file.managed:
     - name: /etc/nginx/sites-available/default
-    - source: salt://webserver/nginx.conf
+    - source: salt://webserver/nginx.site.conf
     - template: jinja
     - makedirs: True
     - mode: 755
