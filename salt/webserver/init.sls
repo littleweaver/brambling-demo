@@ -126,6 +126,7 @@ ssl_crt:
     - group: nginx
     - require:
       - pkg: nginx
+      - file: crt_dir
 
 ssl_key:
   file.managed:
@@ -137,6 +138,7 @@ ssl_key:
     - group: nginx
     - require:
       - pkg: nginx
+      - file: crt_dir
 
 eventlet:
   pip.installed:
