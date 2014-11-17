@@ -75,17 +75,68 @@ nginx:
   service:
     - running
     - watch:
-      - file: nginxconf
+      - file: nginx_site_conf
+      - file: nginx_app_conf
+      - file: ssl_crt
+      - file: ssl_key
     - require:
         - pkg: nginx
 
-nginxconf:
+nginx_app_conf:
+  file.managed:
+    - name: {{ pillar['files']['nginx_app_conf'] }}
+    - source: salt://webserver/nginx.app.conf
+    - template: jinja
+    - makedirs: True
+    - mode: 755
+    - user: nginx
+    - group: nginx
+    - require:
+      - pkg: nginx
+
+nginx_site_conf:
   file.managed:
     - name: /etc/nginx/sites-available/default
     - source: salt://webserver/nginx.conf
     - template: jinja
     - makedirs: True
     - mode: 755
+    - user: nginx
+    - group: nginx
+    - require:
+      - pkg: nginx
+
+crt_dir:
+  file.directory:
+    - name: {{ pillar['files']['crt_dir'] }}
+    - makedirs: True
+    - mode: 755
+    - user: nginx
+    - group: nginx
+    - require:
+      - pkg: nginx
+
+ssl_crt:
+  file.managed:
+    - name: {{ pillar['files']['crt_dir'] }}dancerfly.crt
+    - contents: |-
+        {{ pillar['deploy']['ssl_crt']|indent(8) }}
+    - mode: 400
+    - user: nginx
+    - group: nginx
+    - require:
+      - pkg: nginx
+
+ssl_key:
+  file.managed:
+    - name: {{ pillar['files']['crt_dir'] }}dancerfly.key
+    - contents: |-
+        {{ pillar['deploy']['ssl_key']|indent(8) }}
+    - mode: 400
+    - user: nginx
+    - group: nginx
+    - require:
+      - pkg: nginx
 
 eventlet:
   pip.installed:
