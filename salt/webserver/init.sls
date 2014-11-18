@@ -75,29 +75,16 @@ nginx:
   service:
     - running
     - watch:
-      - file: nginx_site_conf
-      - file: nginx_app_conf
+      - file: nginx_conf
       - file: ssl_crt
       - file: ssl_key
     - require:
         - pkg: nginx
 
-nginx_app_conf:
-  file.managed:
-    - name: {{ pillar['files']['nginx_app_conf'] }}
-    - source: salt://webserver/nginx.app.conf
-    - template: jinja
-    - makedirs: True
-    - mode: 755
-    - user: nginx
-    - group: nginx
-    - require:
-      - pkg: nginx
-
-nginx_site_conf:
+nginx_conf:
   file.managed:
     - name: /etc/nginx/sites-available/default
-    - source: salt://webserver/nginx.site.conf
+    - source: salt://webserver/nginx.conf
     - template: jinja
     - makedirs: True
     - mode: 755
