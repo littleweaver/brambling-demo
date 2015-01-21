@@ -124,10 +124,13 @@ AUTH_USER_MODEL = 'brambling.Person'
 STRIPE_APPLICATION_ID = '{{ pillar["deploy"]["stripe_application_id"] }}'
 STRIPE_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_pk"] }}'
 STRIPE_SECRET_KEY = '{{ pillar["deploy"]["stripe_sk"] }}'
+STRIPE_TEST_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_test_pk"] }}'
+STRIPE_TEST_SECRET_KEY = '{{ pillar["deploy"]["stripe_test_sk"] }}'
 
-DWOLLA_SANDBOX = {% if pillar["deploy"]["dwolla_sandbox"] %}True{% else %}False{% endif %}
 DWOLLA_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_application_key"] }}'
 DWOLLA_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_application_secret"] }}'
+DWOLLA_TEST_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_test_application_key"] }}'
+DWOLLA_TEST_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_test_application_secret"] }}'
 
 DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
 
