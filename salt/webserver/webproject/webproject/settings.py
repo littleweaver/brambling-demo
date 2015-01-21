@@ -124,6 +124,7 @@ AUTH_USER_MODEL = 'brambling.Person'
 STRIPE_APPLICATION_ID = '{{ pillar["deploy"]["stripe_application_id"] }}'
 STRIPE_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_pk"] }}'
 STRIPE_SECRET_KEY = '{{ pillar["deploy"]["stripe_sk"] }}'
+STRIPE_TEST_APPLICATION_ID = '{{ pillar["deploy"]["stripe_test_application_id"] }}'
 STRIPE_TEST_PUBLISHABLE_KEY = '{{ pillar["deploy"]["stripe_test_pk"] }}'
 STRIPE_TEST_SECRET_KEY = '{{ pillar["deploy"]["stripe_test_sk"] }}'
 
