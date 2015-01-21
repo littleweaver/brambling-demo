@@ -148,6 +148,11 @@ LOGGING = {
         },
     },
     'loggers': {
+        'brambling': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
         'django.request': {
             'handlers': ['file'],
             'level': 'DEBUG',
