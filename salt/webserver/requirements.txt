@@ -16,8 +16,9 @@ stripe==1.20.1
 requests==2.5.1
 dwolla==2.0.3
 psycopg2==2.5.3
+django-talkback==0.1.0
 # our own django-zenaida - @master until we reach a peggable point.
--e git+git://github.com/littleweaver/django-zenaida.git@d506bba5c0597fcdd292f8af3391517fc1e74b1f#egg=django-zenaida
+-e git+git://github.com/littleweaver/django-zenaida.git@master#egg=django-zenaida
 -e git+git://github.com/littleweaver/django-brambling.git@master#egg=django-brambling
 
 # Required by dwolla
