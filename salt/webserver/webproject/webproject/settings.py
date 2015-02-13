@@ -135,7 +135,8 @@ DWOLLA_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_application_secret"] }}
 DWOLLA_TEST_APPLICATION_KEY = '{{ pillar["deploy"]["dwolla_test_application_key"] }}'
 DWOLLA_TEST_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_test_application_secret"] }}'
 
-DEFAULT_FROM_EMAIL = '{{pillar["deploy"]["default_from_email"]}}'
+DEFAULT_FROM_EMAIL = '{{ pillar["deploy"]["default_from_email"] }}'
+SERVER_EMAIL = '{{ pillar["deploy"]["server_email"] }}'
 
 LOGGING = {
     'version': 1,
@@ -152,6 +153,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
         },
     },
     'loggers': {
