@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'floppyforms',
     'django_filters',
     'daguerre',
+    'djrill',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -137,6 +138,8 @@ DWOLLA_TEST_APPLICATION_SECRET = '{{ pillar["deploy"]["dwolla_test_application_s
 
 DEFAULT_FROM_EMAIL = '{{ pillar["deploy"]["default_from_email"] }}'
 SERVER_EMAIL = '{{ pillar["deploy"]["server_email"] }}'
+MANDRILL_API_KEY = '{{ pillar["deploy"]["mandrill_api_key"] }}'
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 LOGGING = {
     'version': 1,
