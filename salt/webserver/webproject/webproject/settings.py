@@ -145,6 +145,11 @@ EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s %(levelname)s] %(message)s",
+        },
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
@@ -153,6 +158,7 @@ LOGGING = {
             # Max size: 2MB
             'maxBytes': 2 * 1024 * 1024,
             'backupCount': 5,
+            'formatter': 'verbose',
         },
         'mail_admins': {
             'level': 'ERROR',
