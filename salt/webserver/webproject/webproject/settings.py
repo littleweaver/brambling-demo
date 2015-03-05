@@ -43,8 +43,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'zenaida',
-    # TODO: Remove zenaida.contrib.feedback in the next push
-    'zenaida.contrib.feedback',
     'zenaida.contrib.hints',
     'talkback',
     'floppyforms',
