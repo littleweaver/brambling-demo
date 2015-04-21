@@ -11,6 +11,15 @@ app-pkgs:
       - gcc
       - libjpeg8-dev
       - libpq-dev
+      - ruby
+
+bootstrap_sass:
+  gem.installed:
+    - name: bootstrap-sass
+    - version: 3.3.4.1
+    - user: webproject
+    - require:
+      - pkg: app-pkgs
 
 webproject_user:
   user.present:
@@ -41,6 +50,7 @@ webproject_env:
       - pkg: app-pkgs
       - user: webproject
       - file: webproject_dirs
+      - gem: bootstrap_sass
 
 django_log_dir:
   file.directory:
