@@ -195,7 +195,7 @@ gunicorn_circus_start:
 
 collectstatic:
   cmd.wait:
-    - name: GEM_PATH=/var/lib/gem/ {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py collectstatic --noinput
+    - name: GEM_PATH=/var/lib/gems/1.9.1 {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py collectstatic --noinput
     - user: webproject
     - watch:
       - file: webproject_project
@@ -206,7 +206,7 @@ collectstatic:
 
 migrate:
   cmd.wait:
-    - name: GEM_PATH=/var/lib/gem/ {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py migrate --noinput
+    - name: GEM_PATH=/var/lib/gems/1.9.1 {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py migrate --noinput
     - user: webproject
     - watch:
       - file: webproject_project
