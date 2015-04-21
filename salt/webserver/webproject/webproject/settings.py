@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'django_filters',
     'daguerre',
     'djrill',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,6 +116,20 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 STATIC_ROOT = '{{ pillar["files"]["static_dir"] }}'
 STATIC_URL = '/static/'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+_BOOTSTRAP_SASS_SUBPATH = "/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/"
+STATICFILES_DIRS = [x + _BOOTSTRAP_SASS_SUBPATH for x in os.environ['GEM_PATH'].split(":") if os.path.isdir(x + _BOOTSTRAP_SASS_SUBPATH)]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/sass', 'django_libsass.SassCompiler'),
+)
 
 from django.core.urlresolvers import reverse_lazy
 
