@@ -46,8 +46,6 @@ webproject_env:
     - no_deps: true
     - clear: false
     - user: webproject
-    - env_vars:
-      - GEM_PATH: /var/lib/gem/
     - require:
       - pkg: app-pkgs
       - user: webproject
@@ -197,7 +195,7 @@ gunicorn_circus_start:
 
 collectstatic:
   cmd.wait:
-    - name: {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py collectstatic --noinput
+    - name: GEM_PATH=/var/lib/gem/ {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py collectstatic --noinput
     - user: webproject
     - watch:
       - file: webproject_project
@@ -208,7 +206,7 @@ collectstatic:
 
 migrate:
   cmd.wait:
-    - name: {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py migrate --noinput
+    - name: GEM_PATH=/var/lib/gem/ {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py migrate --noinput
     - user: webproject
     - watch:
       - file: webproject_project
