@@ -46,6 +46,8 @@ webproject_env:
     - no_deps: true
     - clear: false
     - user: webproject
+    - env_vars:
+      - GEM_PATH: /var/lib/gem/
     - require:
       - pkg: app-pkgs
       - user: webproject
