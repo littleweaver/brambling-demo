@@ -12,6 +12,7 @@ app-pkgs:
       - libjpeg8-dev
       - libpq-dev
       - ruby
+      - ruby-dev
 
 bootstrap_sass:
   gem.installed:
