@@ -13,22 +13,12 @@ app-pkgs:
       - libpq-dev
       - ruby
 
-gem_dir:
-  file.directory:
-    - user: webproject
-    - group: webproject
-    - name: /var/lib/gems
-    - require:
-      - pkg: app-pkgs
-
 bootstrap_sass:
   gem.installed:
     - name: bootstrap-sass
     - version: 3.3.4.1
-    - user: webproject
     - require:
       - pkg: app-pkgs
-      - file: gem_dir
 
 webproject_user:
   user.present:
