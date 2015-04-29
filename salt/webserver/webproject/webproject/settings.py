@@ -72,6 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    "brambling.context_processors.google_analytics",
 )
 
 ROOT_URLCONF = 'webproject.urls'
@@ -154,6 +155,9 @@ DEFAULT_FROM_EMAIL = '{{ pillar["deploy"]["default_from_email"] }}'
 SERVER_EMAIL = '{{ pillar["deploy"]["server_email"] }}'
 MANDRILL_API_KEY = '{{ pillar["deploy"]["mandrill_api_key"] }}'
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+
+GOOGLE_ANALYTICS_UA = 'UA-52154832-1'
+GOOGLE_ANALYTICS_DOMAIN = 'dancerfly.com'
 
 LOGGING = {
     'version': 1,
