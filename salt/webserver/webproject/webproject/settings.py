@@ -73,6 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
     "brambling.context_processors.google_analytics",
+    'brambling.context_processors.current_site',
 )
 
 ROOT_URLCONF = 'webproject.urls'
