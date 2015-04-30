@@ -29,6 +29,7 @@ license_key={{ pillar['deploy']['new_relic_license_key'] }}
 # Note   : Can also be set with the -d command line option.
 #
 loglevel=info
+
 #
 # Option : logfile
 # Value  : Name of the file where the server monitor will store it's log
@@ -53,37 +54,106 @@ logfile=/var/log/newrelic/nrsysmond.log
 #proxy=
 
 #
-# Option : ssl
-# Value  : Whether or not to use the Secure Sockets Layer (SSL) for all
-#          communication with the New Relic collector. Possible values are
-#          true/on or false/off. In certain rare cases you may need to modify
-#          the SSL certificates settings below.
-# Default: false
+# Setting: ssl
+# Type   : boolean
+# Purpose: If you prefer the daemon to use the secure HTTP (https) protocol
+#          when communicating with the New Relic collector servers, set this
+#          to true.
+# Default: true (as of version 1.4)
 #
-#ssl=false
+#ssl=true
 
 #
-# Option : ssl_ca_bundle
-# Value  : The name of a PEM-encoded Certificate Authority (CA) bundle to use
-#          for SSL connections. This very rarely needs to be set. The monitor
-#          will attempt to find the bundle in the most common locations. If
-#          you need to use SSL and the monitor is unable to locate a CA bundle
-#          then either set this value or the ssl_ca_path option below.
-# Default: /etc/ssl/certs/ca-certificates.crt or
-#          /etc/pki/tls/certs/ca-bundle.crt
+# Setting: docker_connection
+# Type   : string
+# Purpose: Determine how to communicate with the Docker API on the local host.
+#          Valid values are:
+#
+#          uds:///path/to/socket
+#          unix:///path/to/socket
+#          /path/to/socket
+#            These three forms are all equivalent and are used to point to the
+#            UNIX-domain socket (UDS). The socket path must be absolute and the
+#            socket must be writeable.
+#
+#          tcp://localhost:port
+#          http://localhost:port
+#            Use an unencrypted connection to the local host on the specified
+#            port. If the :port portion is missing it defaults to 2376. The
+#            host name MUST be localhost or 127.0.0.1. No other host name is
+#            valid.
+#
+#          https://localhost:port
+#            Use an encrypted connection to the local host om the specified
+#            port. If the :port portion is missing it defaults to 2376. The
+#            host name MUST be localhost or 127.0.0.1. No other host name is
+#            valid. In order to use TLS authentication you may need to set
+#            the various key and certificate options below.
+#
+#          If no value is set, attempt to use the default (/var/run/docker.sock)
+#          if it exists and is writable. If that fails, attempt to use the value
+#          of the environment variable DOCKER_HOST.
+#
+#          You may need to add the user that you run LSM as to the docker
+#          group. Please consult the Docker web site for details and security
+#          implications.
+# Default: empty
+#docker_connection=
+
+#
+# Setting: docker_cert_path
+# Type   : string
+# Purpose: Set the default location to look for the certificate, key and CA
+#          certificate for using TLS. If no value is set and the directory
+#          $HOME/.docker exists, that is used as the default value. LSM will
+#          look in this directory for the cert.pem, key.pem and cacert.pem
+#          files, and use them if present. If set, the environment variable
+#          $DOCKER_CERT_PATH will be used as the default value if no value
+#          is explicitly set here.
+# Default: empty
+#docker_cert_path=
+
+#
+# Setting: docker_cert
+#          docker_key
+#          docker_cacert
+# Type   : string
+# Purpose: Set the name of the certificate, key and CA certificate files to
+#          use for TLS. If these are not absolute paths they are searched for
+#          in the directory determined by docker_cert_path above.
+# Default: empty
+#docker_cert=
+#docker_key=
+#docker_cacert=
+
+#
+# Setting: ssl_ca_bundle
+# Type   : string
+# Purpose: Sets the location of a file containing CA certificates in PEM
+#          format. When set, the certificates in this file will be used
+#          to authenticate the New Relic collector servers. If ssl_ca_path
+#          is also set (see below), the certificates in this file will be
+#          searched first, followed by the certificates contained in the
+#          ssl_ca_path directory. This setting has no effect when ssl
+#          is set to false.
+# Default: none
 # Note   : Can also be set with the -b command line option.
 #
-#ssl_ca_bundle=/path/to/your/bundle.crt
+#ssl_ca_bundle=
 
 #
-# Option : ssl_ca_path
-# Value  : If your SSL installation does not use CA bundles, but rather has a
-#          directory with PEM-encoded Certificate Authority files, set this
-#          option to the name of the directory that contains all the CA files.
-# Default: /etc/ssl/certs
+# Setting: ssl_ca_path
+# Type   : string
+# Purpose: Sets the location of a directory containing trusted CA certificates
+#          in PEM format. When set, the certificates in this directory will be
+#          used to authenticate the New Relic collector servers. If
+#          ssl_ca_bundle is also set (see above), it will be searched first
+#          followed by the certificates contained in ssl_ca_path. This
+#          setting has no effect when ssl is set to false.
+# Default: none
 # Note   : Can also be set with the -S command line option.
 #
-#ssl_ca_path=/etc/ssl/certs
+#ssl_ca_path=
 
 #
 # Option : pidfile
@@ -108,15 +178,28 @@ logfile=/var/log/newrelic/nrsysmond.log
 #collector_host=collector.newrelic.com
 
 #
-# Option : timeout
-# Value  : How long the monitor should wait to contact the collector host. If
-#          the connection cannot be established in this period of time, the
-#          monitor will progressively back off in 15-second increments, up to
-#          a maximum of 300 seconds. Once the initial connection has been
-#          established, this value is reset back to the value specified here
-#          (or the default). This then sets the maximum time to wait for
-#          a connection to the collector to report data. There is no back-off
-#          once the original connection has been made. The value is in seconds.
-# Default: 30
+# Option : labels
+# Value  : A series of label_type/label_value pairings
+#          Each item in the pair is separated by a colon
+#          Each pair is separated by a semicolon
+#          e.g. 
+#            labels = Environment:Production;DataCenter:EastUS;
+# Default: none
 #
-#timeout=30
+#labels=label_type:label_value
+
+#
+# Option : disable_nfs
+# Type   : boolean
+# Value  : Set to true to disable NFS client statistics gathering.
+# Default: false
+#
+#disable_nfs=false
+
+#
+# Option : disable_docker
+# Type   : boolean
+# Value  : Set to true to disable Docker container statistics gathering.
+# Default: false
+#
+#disable_docker=false
