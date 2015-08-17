@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   ## Chose your base box
-  config.vm.box = "precise32"
+  config.vm.box = "ubuntu/trusty32"
 
   ## For masterless, mount your salt file root
   config.vm.synced_folder "salt/", "/srv/salt/"
