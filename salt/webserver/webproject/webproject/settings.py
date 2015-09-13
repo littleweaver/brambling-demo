@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 ADMINS = (
-    ('Little Weaver', 'hello@littleweaverweb.com'),
+    ('Dancerfly Support', 'support@dancerfly.com'),
 )
 
 # Quick-start development settings - unsuitable for production
