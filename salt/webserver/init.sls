@@ -214,3 +214,10 @@ migrate:
     - require:
       - postgres_database: webproject_db
       - user: webproject_user
+
+dwolla_update_tokens:
+  cron.present:
+    - user: webproject
+    - name: GEM_PATH=/var/lib/gems/1.9.1 {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py update_tokens --days=15
+    - hour: 6
+    - minute: 0
