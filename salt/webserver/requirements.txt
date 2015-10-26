@@ -26,10 +26,9 @@ newrelic==2.54.0.41
 # our own django-zenaida - @master until we reach a peggable point.
 -e git+git://github.com/littleweaver/django-zenaida.git@master#egg=django-zenaida
 -e git+git://github.com/littleweaver/django-brambling.git@master#egg=django-brambling
-
-# excel download support
 openpyxl==2.2.6
 jdcal==1.0
+unicodecsv==0.14.1
 
 # Required by dwolla
 mock==1.0.1
