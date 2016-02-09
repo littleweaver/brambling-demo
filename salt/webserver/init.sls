@@ -221,3 +221,11 @@ dwolla_update_tokens:
     - name: GEM_PATH=/var/lib/gems/1.9.1 {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py update_tokens --days=15
     - hour: 6
     - minute: 0
+
+
+send_daily_emails:
+  cron.present:
+    - user: webproject
+    - name: {{ pillar['files']['env_dir'] }}bin/python {{ pillar['files']['project_dir'] }}manage.py send_daily_emails
+    - hour: 18
+    - minute: 0
