@@ -77,6 +77,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'brambling.context_processors.current_site',
 )
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'brambling.auth_backends.BramblingBackend',
+]
+
 ROOT_URLCONF = 'webproject.urls'
 
 WSGI_APPLICATION = 'webproject.wsgi.application'
